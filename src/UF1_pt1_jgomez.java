@@ -35,7 +35,7 @@ public class UF1_pt1_jgomez {
 				System.out.println("See ya soon!");
 				power = false;
 				break;
-			case 6: 
+			case 6:
 				toFitxer();
 				break;
 			case 7:
@@ -164,43 +164,42 @@ public class UF1_pt1_jgomez {
 			}
 		}
 	}
-	
+
 	public static void toFitxer() throws FileNotFoundException {
 		if (tm.isEmpty()) {
 			System.out.println("La llista de jocs es buida!");
 			return;
 		}
-		
+
 		File f = new File("deMapToFitxer.txt");
-		
+
 		PrintStream ps = new PrintStream(f);
 		Iterator<String> lol = tm.keySet().iterator();
-		
-		for (int i = 0 ; i < tm.size(); i++) {
+
+		for (int i = 0; i < tm.size(); i++) {
 			String aux = lol.next().toString();
 			ps.println(aux + " " + tm.get(aux));
 		}
-		
+
 		ps.close();
-		
+
 		System.out.println("Fitxer desat");
 	}
-	
+
 	public static void fitxerToMap() throws FileNotFoundException {
 		File f = new File("/home/joan/eclipse-workspace/M6_UF1/deMapToFitxer.txt");
 		Scanner s = new Scanner(f);
-		tm = new TreeMap<String, Float>();
-		
-		while (s.hasNext()) {
+		tm = new TreeMap<String, Float>(); // buidem el TreeMap per complet
+
+		while (s.hasNext()) { // amb aquest while el tornem a plennar assumint que es borrara la informacio
+								// antiga
 			String[] aux = s.nextLine().split(" ");
-			
-			
-			
+
 			tm.put(aux[0], Float.parseFloat(aux[1]));
 		}
-		
+
 		llistarJocs();
-		
+
 		s.close();
 	}
 }
