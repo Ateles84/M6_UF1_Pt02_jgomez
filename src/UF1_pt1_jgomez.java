@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Scanner;
 import java.util.TreeMap;
@@ -15,7 +16,7 @@ public class UF1_pt1_jgomez {
 
 		while (power) { // base del menu
 			System.out.println(
-					"Benvingut al menu de videojocs de ValliJocs! \r1. Insertar un videojoc \r2. Modificar un videojoc \r3. Borrar un videojoc \r4. Mostrar tots els jocs \r5. Sortir del menu \r6. Afegir dades actuals al fitxer \r7. Mostrar per pantalla el contingut del fitxer");
+					"Benvingut al menu de videojocs de ValliJocs! \r1. Insertar un videojoc \r2. Modificar un videojoc \r3. Borrar un videojoc \r4. Mostrar tots els jocs \r5. Sortir del menu \r6. Afegir dades actuals al fitxer \r7. Importa al TreeMap el contingut del fitxer");
 
 			switch (validarOpcio()) {
 			case 1:
@@ -38,7 +39,7 @@ public class UF1_pt1_jgomez {
 				toFitxer();
 				break;
 			case 7:
-				llegirFitxer();
+				fitxerToMap();
 				break;
 			default:
 				System.out.println("Introdueix un valor del 1 al 7!");
@@ -53,6 +54,7 @@ public class UF1_pt1_jgomez {
 				return sc.nextInt();
 			} else {
 				System.out.println("Introdueix una opcio valida!");
+				sc.next();
 			}
 		}
 	}
@@ -176,7 +178,7 @@ public class UF1_pt1_jgomez {
 		
 		for (int i = 0 ; i < tm.size(); i++) {
 			String aux = lol.next().toString();
-			ps.println(i+1+". "+aux + " " + tm.get(aux) + "€");
+			ps.println(aux + " " + tm.get(aux));
 		}
 		
 		ps.close();
@@ -184,11 +186,20 @@ public class UF1_pt1_jgomez {
 		System.out.println("Fitxer desat");
 	}
 	
-	public static void llegirFitxer() throws FileNotFoundException {
-		File f = new File("deMapToFitxer.txt");
+	public static void fitxerToMap() throws FileNotFoundException {
+		File f = new File("/home/joan/eclipse-workspace/M6_UF1/deMapToFitxer.txt");
 		Scanner s = new Scanner(f);
+		tm = new TreeMap<String, Float>();
 		
-		while (s.hasNext()) System.out.println(s.nextLine());
+		while (s.hasNext()) {
+			String[] aux = s.nextLine().split(" ");
+			
+			
+			
+			tm.put(aux[0], Float.parseFloat(aux[1]));
+		}
+		
+		llistarJocs();
 		
 		s.close();
 	}

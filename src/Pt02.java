@@ -123,4 +123,6 @@ public class Pt02 {
 
 		sc.close();
 	}
+
+	//L'exercici les 2 ultimes opcions/metodes del fitxer UF1_pt1_jgomez.java d'aquest mateix paquet
 }
