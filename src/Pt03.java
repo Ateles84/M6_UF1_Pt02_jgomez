@@ -11,16 +11,23 @@ import java.nio.file.StandardCopyOption;
 import java.util.Scanner;
 
 public class Pt03 {
-
+	/*---------------------------------------------------------------------------------
+	 * Declaracio de les diverses eines que faré servir a lo llarg del programa, per
+	 * fer proves, canviar les rutes de f1 i f2
+	 ---------------------------------------------------------------------------------*/
 	static Scanner sc;
 	static DataInputStream dis;
 	static DataOutputStream os;
-	static File f1 = new File("/home/joan/eclipse-workspace/M6_UF1/becadades.dat"); 
-	static File f2 = new File("/home/joan/eclipse-workspace/M6_UF1/becadadesBK.dat"); 
+	static File f1 = new File("/home/joan/eclipse-workspace/M6_UF1/becadades.dat");
+	static File f2 = new File("/home/joan/eclipse-workspace/M6_UF1/becadadesBK.dat");
 
 	public static void main(String[] args) throws IOException {
 		sc = new Scanner(System.in);
 		boolean power = true;
+
+		/*---------------------------------------------------------------------------------
+		 * Tipic menu amb un Switch, cada opcio crida a un Method de la propia classe
+		 ---------------------------------------------------------------------------------*/
 
 		while (power) {
 
@@ -53,12 +60,23 @@ public class Pt03 {
 
 		}
 
+		// Tancament del Scanner, DataOutputStream i DataInputStream
+
 		sc.close();
 		dis.close();
 		os.close();
 	}
 
+	/*---------------------------------------------------------------------------------
+	 * METODES D'ESCRIPTURA / LECTURA
+	 ---------------------------------------------------------------------------------*/
+
 	public static void questionari() throws IOException {
+
+		/*---------------------------------------------------------------------------------
+		 * Declaracio del scanner i DataOutputStream per a escriure el fitxer binari sense sobreescriure el text anterior (metodes de validacio explicats mes abaix<)
+		 ---------------------------------------------------------------------------------*/
+
 		os = new DataOutputStream(new FileOutputStream(f1, true));
 		sc = new Scanner(System.in);
 
@@ -83,6 +101,12 @@ public class Pt03 {
 	}
 
 	public static void llistarBecaris(File f) throws IOException {
+
+		/*---------------------------------------------------------------------------------
+		 * Metode que a partir d'un while infinit i jugant amb la excepcio EndOfFile, imprimeix tot el contingut del fitxer amb el determinat format.
+		 * L'argument del Method es per a escollir si llistar l'arxiu principal o el backup (es pot veure facilment al switch)
+		 ---------------------------------------------------------------------------------*/
+
 		dis = new DataInputStream(new FileInputStream(f));
 
 		while (true) {
@@ -99,6 +123,12 @@ public class Pt03 {
 	}
 
 	public static void ferBK() {
+
+		/*---------------------------------------------------------------------------------
+		 * Metode que realitza un backup amb el mateix sistema de while amb excepcio d'abans. 
+		 * El metode escriu a l'hora que llegeix, pel que no emmagatzema variables addicionals
+		 ---------------------------------------------------------------------------------*/
+
 		try {
 			dis = new DataInputStream(new FileInputStream(f1));
 			os = new DataOutputStream(new FileOutputStream(f2));
@@ -106,7 +136,7 @@ public class Pt03 {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		while (true) {
 			try {
 				os.writeUTF(dis.readUTF());
@@ -121,6 +151,11 @@ public class Pt03 {
 		}
 
 	}
+
+	/*---------------------------------------------------------------------------------
+	 * VALIDACIO DE DADES
+	 * Tots els metodes de validacio de dades funcionen igual, un metode que retorna el tipus de dada dessitjada, i en un while true, asseguta que es  el tipus i/o valor dessitjat
+	 ---------------------------------------------------------------------------------*/
 
 	public static String validarString() {
 		sc = new Scanner(System.in);
