@@ -24,7 +24,7 @@ import org.xml.sax.SAXException;
 public class Pt5punt2_jgomez {
 	public static void main(String[] args) {
 		creacioXML();
-		
+
 	}
 
 	static void creacioXML() {
@@ -101,11 +101,20 @@ public class Pt5punt2_jgomez {
 					System.out.println("Introdueix el nom de l'alumne que vols eliminar: ");
 					String ripAlumne = sc.next();
 
-					NodeList nodes = alumnes.getElementsByTagName(ripAlumne);
-					if (nodes.getLength() > 0)
-						nodes.item(0).getParentNode().removeChild(nodes.item(0));
-					else
-						System.out.println("No s'ha trobat a l'alumne introduit");
+					NodeList nodes = alumnes.getElementsByTagName("Alumnes");
+
+					for (int q = 0; q < nodes.getLength(); q++) {
+						Node nNode = nodes.item(q);
+
+						if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+							Element eElement = (Element) nNode;
+							if (eElement.getElementsByTagName(ripAlumne).item(0).getTextContent().equals(ripAlumne)) {
+								alumnes.removeChild(eElement);
+								System.out.println("Alumne eliminat :)");
+							}
+						}
+					}
+
 					break;
 				case 3:
 					lolaux = false;
@@ -113,11 +122,11 @@ public class Pt5punt2_jgomez {
 				}
 
 			}
-			
+
 			sc.close();
-			
+
 			TransformerFactory transformerFactory = TransformerFactory.newInstance();
-			Transformer transformer = transformerFactory.newTransformer();					
+			Transformer transformer = transformerFactory.newTransformer();
 			DOMSource source = new DOMSource(doc);
 			StreamResult result = new StreamResult(new File("Cursos.xml"));
 			try {
@@ -133,5 +142,5 @@ public class Pt5punt2_jgomez {
 			e.printStackTrace();
 		}
 	}
-	
+
 }
