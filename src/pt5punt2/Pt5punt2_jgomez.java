@@ -101,14 +101,14 @@ public class Pt5punt2_jgomez {
 					System.out.println("Introdueix el nom de l'alumne que vols eliminar: ");
 					String ripAlumne = sc.next();
 
-					NodeList nodes = alumnes.getElementsByTagName("Alumnes");
+					NodeList nodes = alumnes.getElementsByTagName("Alumne");
 
 					for (int q = 0; q < nodes.getLength(); q++) {
 						Node nNode = nodes.item(q);
 
 						if (nNode.getNodeType() == Node.ELEMENT_NODE) {
 							Element eElement = (Element) nNode;
-							if (eElement.getElementsByTagName(ripAlumne).item(0).getTextContent().equals(ripAlumne)) {
+							if (eElement.getTextContent().equals(ripAlumne)) {
 								alumnes.removeChild(eElement);
 								System.out.println("Alumne eliminat :)");
 							}
@@ -129,9 +129,11 @@ public class Pt5punt2_jgomez {
 			Transformer transformer = transformerFactory.newTransformer();
 			DOMSource source = new DOMSource(doc);
 			StreamResult result = new StreamResult(new File("Cursos.xml"));
+			
 			try {
 				transformer.transform(source, result);
-			} catch (TransformerException e) {
+			} 
+				catch (TransformerException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
