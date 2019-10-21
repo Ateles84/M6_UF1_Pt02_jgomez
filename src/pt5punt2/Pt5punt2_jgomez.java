@@ -88,13 +88,36 @@ public class Pt5punt2_jgomez {
 
 				switch (aux) {
 				case 1:
-					System.out.println("Introdueix el nom de l'alumne: ");
-					String nouAlumne = sc.next();
-
-					Element alumne = doc.createElement("Alumne");
-					alumne.appendChild(doc.createTextNode(nouAlumne));
-					alumnes.appendChild(alumne);
-
+					System.out.println("Introdueix el curs al que vols afegir l'alumne: ");
+					String curss = sc.next();
+					
+					NodeList nodess = elementPare.getElementsByTagName("Curs");
+					
+					for (int q = 0; q < nodess.getLength() ; q++) {
+						Node node = nodess.item(q);
+						
+						if (node.getNodeType() == Node.ELEMENT_NODE) {
+							Element element = (Element) node;
+							
+							if (element.getAttribute("id").equals(curss)) {
+								
+								System.out.println("Introdueix el nom del nou alumne!");
+								
+								String nouAlumne = sc.next();
+								
+								Element alumne = doc.createElement("Alumne");
+								alumne.appendChild(doc.createTextNode(nouAlumne));
+								alumnes.appendChild(alumne);
+								System.out.println("Alumne insertat amb exit!");
+								
+								q = nodess.getLength()+1;
+								
+							} else if(q == nodess.getLength()-1) {
+								System.out.println("Curs no trobat");
+							} 
+						}
+					}
+					
 					break;
 
 				case 2:
@@ -118,6 +141,7 @@ public class Pt5punt2_jgomez {
 					break;
 				case 3:
 					lolaux = false;
+					System.out.println("c ya c:");
 					break;
 				}
 

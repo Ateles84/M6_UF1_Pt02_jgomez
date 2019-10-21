@@ -1,1 +1,1 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><Cursos><Curs id="AMS2"><Tutor>David Espeja</Tutor><Alumnes><Alumne>Pepe</Alumne></Alumnes><Moduls><Modul id="M06"><Profes><Profe>Rafa Aracil</Profe></Profes></Modul><UFs><UF n="1">Persitencia en fitxers</UF></UFs></Moduls></Curs></Cursos>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><Cursos><Curs id="AMS2"><Tutor>David Espeja</Tutor><Alumnes/><Moduls><Modul id="M06"><Profes><Profe>Rafa Aracil</Profe></Profes></Modul><UFs><UF n="1">Persitencia en fitxers</UF></UFs></Moduls></Curs></Cursos>
